@@ -15,7 +15,6 @@ import { GlobalStoreContext } from '../store/index.js'
 function WorkspaceScreen() {
     const { store } = useContext(GlobalStoreContext);
     store.history = useHistory();
-    
     return (
         <Box>
         <List 
@@ -32,9 +31,9 @@ function WorkspaceScreen() {
                     />
                 ))  
             }
-         </List>  
-         <MUIEditSongModal />             
-         <MUIRemoveSongModal /> 
+         </List>
+         <MUIEditSongModal />     
+         <MUIRemoveSongModal />
          </Box>
     )
 }
