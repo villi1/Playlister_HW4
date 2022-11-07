@@ -34,7 +34,7 @@ function SongCard(props) {
         store.addMoveSongTransaction(sourceIndex, targetIndex);
     }
     function handleRemoveSong(event) {
-        store.showRemoveSongModal(index, song);
+        store.markSongForDeletion(index, song);
     }
     function handleClick(event) {
         // DOUBLE CLICK IS FOR SONG EDITING
