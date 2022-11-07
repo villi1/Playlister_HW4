@@ -242,6 +242,7 @@ function GlobalStoreContextProvider(props) {
                                         }
                                     });
                                 }
+                                store.setCurrentList(playlist._id);
                             }
                             getListPairs(playlist);
                         }
