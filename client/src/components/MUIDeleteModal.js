@@ -35,9 +35,9 @@ export default function MUIDeleteModal() {
         >
             <Box sx={style}>
                 <div className="modal-dialog">
-                <header className="dialog-header">
-                    Delete the {name} List?
-                </header>
+                    <header className="dialog-header">
+                        Delete the <b>{name}</b> List?
+                    </header>
                 <div id="confirm-cancel-container">
                     <button
                         id="dialog-yes-button"

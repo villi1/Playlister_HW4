@@ -45,7 +45,8 @@ export default function MUIRemoveSongModal() {
             <Box sx={style}>
             <div
         id="remove-song-modal"
-        className={modalClass}
+        // className={modalClass}
+        className="modal-dialog"
         data-animation="slideInOutLeft">
         <div className="modal-root" id='verify-remove-song-root'>
             <div className="modal-north">
