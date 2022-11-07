@@ -18,7 +18,7 @@ function ListCard(props) {
     const { store } = useContext(GlobalStoreContext);
     const [editActive, setEditActive] = useState(false);
     const [text, setText] = useState("");
-    const { idNamePair, selected } = props;
+    const { idNamePair } = props;
 
     function handleLoadList(event, id) {
         console.log("handleLoadList for " + id);
@@ -47,10 +47,11 @@ function ListCard(props) {
         setEditActive(newActive);
     }
 
-    async function handleDeleteList(event, id) {
+    function handleDeleteList(event, id) {
         event.stopPropagation();
-        let _id = event.target.id;
-        _id = ("" + _id).substring("delete-list-".length);
+        // let _id = event.target.id;
+        // _id = ("" + _id).substring("delete-list-".length);
+        console.log(`handleDeleteList(${event}, ${id})`)
         store.markListForDeletion(id);
     }
 
@@ -65,14 +66,6 @@ function ListCard(props) {
         setText(event.target.value);
     }
 
-    let selectClass = "unselected-list-card";
-    if (selected) {
-        selectClass = "selected-list-card";
-    }
-    let cardStatus = false;
-    if (store.isListNameEditActive) {
-        cardStatus = true;
-    }
     let cardElement =
         <ListItem
             id={idNamePair._id}
