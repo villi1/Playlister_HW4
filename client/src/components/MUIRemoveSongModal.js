@@ -18,6 +18,8 @@ const style = {
 
 export default function MUIRemoveSongModal() {
     const { store } = useContext(GlobalStoreContext);
+    console.log(`MUIRemoveSongModal rendering`)
+    console.log(store.currentModal)
 
     function handleConfirmRemoveSong () {
         store.addRemoveSongTransaction();
@@ -47,11 +49,11 @@ export default function MUIRemoveSongModal() {
         data-animation="slideInOutLeft">
         <div className="modal-root" id='verify-remove-song-root'>
             <div className="modal-north">
-                Remove {songTitle}?
+                <b>Remove song?</b>
             </div>
             <div className="modal-center">
                 <div className="modal-center-content">
-                    Are you sure you wish to permanently remove {songTitle} from the playlist?
+                    Are you sure you wish to permanently remove <b>{songTitle}</b> from the playlist?
                 </div>
             </div>
             <div className="modal-south">

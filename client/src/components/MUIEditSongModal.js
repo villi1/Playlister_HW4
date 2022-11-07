@@ -18,9 +18,11 @@ const style = {
 
 export default function MUIEditSongModal() {
     const { store } = useContext(GlobalStoreContext);
-    const [ title, setTitle ] = useState(store.currentSong.title);
-    const [ artist, setArtist ] = useState(store.currentSong.artist);
-    const [ youTubeId, setYouTubeId ] = useState(store.currentSong.youTubeId);
+    console.log('looking here!!!!');
+    console.log(store.currentSong);
+    const [ title, setTitle ] = useState('');
+    const [ artist, setArtist ] = useState('');
+    const [ youTubeId, setYouTubeId ] = useState('');
 
     function handleConfirmEditSong() {
         let newSongData = {
@@ -61,7 +63,7 @@ export default function MUIEditSongModal() {
                 className="modal-root">
                 <div
                     id="edit-song-modal-header"
-                    className="modal-north">Edit Song</div>
+                    className="modal-north"><b>Edit Song</b></div>
                 <div
                     id="edit-song-modal-content"
                     className="modal-center">
