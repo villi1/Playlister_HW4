@@ -16,13 +16,6 @@ function WorkspaceScreen() {
     const { store } = useContext(GlobalStoreContext);
     store.history = useHistory();
     
-    let modalJSX = "";
-    if (store.isEditSongModalOpen()) {
-        modalJSX = <MUIEditSongModal />;
-    }
-    else if (store.isRemoveSongModalOpen()) {
-        modalJSX = <MUIRemoveSongModal />;
-    }
     return (
         <Box>
         <List 
@@ -39,7 +32,8 @@ function WorkspaceScreen() {
                     />
                 ))  
             }
-         </List>            
+         </List>  
+         <MUIEditSongModal />             
          <MUIRemoveSongModal /> 
          </Box>
     )
