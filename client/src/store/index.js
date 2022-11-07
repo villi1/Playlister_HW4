@@ -56,7 +56,7 @@ function GlobalStoreContextProvider(props) {
         newListCounter: 0,
         listNameActive: false,
         listIdMarkedForDeletion: null,
-        listMarkedForDeletion: null
+        listMarkedForDeletion: null,
     });
     const history = useHistory();
 
@@ -227,7 +227,7 @@ function GlobalStoreContextProvider(props) {
                 let playlist = response.data.playlist;
                 playlist.name = newName;
                 async function updateList(playlist) {
-                    try{
+                    try {
                         response = await api.updatePlaylistById(playlist._id, playlist);
                         if (response.data.success) {
                             async function getListPairs(playlist) {
@@ -241,15 +241,15 @@ function GlobalStoreContextProvider(props) {
                                             playlist: playlist
                                         }
                                     });
+                                    store.setCurrentList(playlist._id)
                                 }
-                                store.setCurrentList(playlist._id);
                             }
                             getListPairs(playlist);
                         }
                     } catch (err) {
                         console.log(err)
                     }
-                } 
+                }
                 updateList(playlist);
             }
         }
@@ -262,7 +262,7 @@ function GlobalStoreContextProvider(props) {
             type: GlobalStoreActionType.CLOSE_CURRENT_LIST,
             payload: {}
         });
-        history.push('/');
+        history.push('/')
         tps.clearAllTransactions();
     }
 
@@ -324,6 +324,7 @@ function GlobalStoreContextProvider(props) {
         getListToDelete(id);
     }
     store.deleteList = function (id) {
+        console.log(`deleteList(${id})`)
         async function processDelete(id) {
             let response = await api.deletePlaylistById(id);
             if (response.data.success) {
@@ -334,12 +335,10 @@ function GlobalStoreContextProvider(props) {
         processDelete(id);
     }
     store.deleteMarkedList = function() {
+        console.log(`deleteMarkedList: ${store.listIdMarkedForDeletion}`)
         store.deleteList(store.listIdMarkedForDeletion);
-        store.unmarkListForDeletion();
+        store.unmarkListForDeletion()
     }
-    // THIS FUNCTION SHOWS THE MODAL FOR PROMPTING THE USER
-    // TO SEE IF THEY REALLY WANT TO DELETE THE LIST
-
     store.unmarkListForDeletion = function() {
         storeReducer({
             type: GlobalStoreActionType.MARK_LIST_FOR_DELETION,
@@ -348,13 +347,15 @@ function GlobalStoreContextProvider(props) {
         store.hideModals();
     }
 
-    store.showEditSongModal = (songIndex, songToEdit) => {
+    store.markSongForEditing = (songIndex, songToEdit) => {
+        console.log(`markSongForEditing(${songIndex}, ${songToEdit})`)
         storeReducer({
             type: GlobalStoreActionType.EDIT_SONG,
             payload: {currentSongIndex: songIndex, currentSong: songToEdit}
         });        
     }
-    store.showRemoveSongModal = (songIndex, songToRemove) => {
+    store.markSongForDeletion = (songIndex, songToRemove) => {
+        console.log(`markSongForDeletion(${songIndex}, ${songToRemove})`)
         storeReducer({
             type: GlobalStoreActionType.REMOVE_SONG,
             payload: {currentSongIndex: songIndex, currentSong: songToRemove}
@@ -461,7 +462,7 @@ function GlobalStoreContextProvider(props) {
     store.addNewSong = () => {
         let playlistSize = store.getPlaylistSize();
         store.addCreateSongTransaction(
-            playlistSize, "Untitled", "?", "dQw4w9WgXcQ");
+            playlistSize, "Untitled", "Unknown", "dQw4w9WgXcQ");
     }
     // THIS FUNCDTION ADDS A CreateSong_Transaction TO THE TRANSACTION STACK
     store.addCreateSongTransaction = (index, title, artist, youTubeId) => {
