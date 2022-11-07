@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import AuthContext from '../auth'
 
 import Copyright from './Copyright'
@@ -35,16 +35,19 @@ export default function LoginScreen() {
     const { auth } = useContext(AuthContext);
     const open = (auth.modalMessage !== null)
     const message = auth.modalMessage
+    console.log(open)
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const email = formData.get('email')
         const password = formData.get('password')
+        console.log(`email: ${email}\npassword: ${password}`)
         auth.loginUser(email, password)
-    };
+    }
 
-    
+    const handleClose = () => auth.closeModal()
+
     return (
         <Grid container component="main" sx={{ height: '100vh' }}>
             <CssBaseline />

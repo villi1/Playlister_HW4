@@ -32,6 +32,7 @@ export default function RegisterScreen() {
     const { auth } = useContext(AuthContext);
     const open = (auth.modalMessage !== null)
     const message = auth.modalMessage
+    console.log(open)
 
     const handleSubmit = (event) => {
         event.preventDefault();
