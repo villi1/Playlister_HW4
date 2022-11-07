@@ -22,11 +22,10 @@ export default function LoginScreen() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        auth.loginUser(
-            formData.get('email'),
-            formData.get('password')
-        );
-
+        //get email and password from the FormData
+        const email = formData.get('email')
+        const password = formData.get('password')
+        auth.loginUser(email, password)
     };
 
     return (

@@ -78,20 +78,33 @@ function AuthContextProvider(props) {
                     user: response.data.user
                 }
             })
-            history.push("/login");
+            // history.push("/login");
+            //make sure log in works
+            auth.loginUser(email, password);
         }
     }
 
     auth.loginUser = async function(email, password) {
-        const response = await api.loginUser(email, password);
-        if (response.status === 200) {
-            authReducer({
-                type: AuthActionType.LOGIN_USER,
-                payload: {
-                    user: response.data.user
-                }
-            })
-            history.push("/");
+        try { 
+            const response = await api.loginUser(email, password);
+            if (response.status === 200) {
+                authReducer({
+                    type: AuthActionType.LOGIN_USER,
+                    payload: {
+                        user: response.data.user
+                    }
+                })
+                history.push("/");
+            } else {
+                history.push("/");
+            }
+        } catch (err) {
+            if (err.response.status === 400) {
+                console.log('email or password is empty')
+            }
+            if (err.response.status === 401) {
+                console.log('invalid email or password')
+            }
         }
     }
 
