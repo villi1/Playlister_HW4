@@ -3,6 +3,9 @@ import GlobalStoreContext from '../store';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 const style = {
     position: 'absolute',
@@ -43,35 +46,32 @@ export default function MUIRemoveSongModal() {
             open={store.currentModal === "REMOVE_SONG"}
         >
             <Box sx={style}>
-            <div
-        id="remove-song-modal"
-        // className={modalClass}
-        className="modal-dialog"
-        data-animation="slideInOutLeft">
-        <div className="modal-root" id='verify-remove-song-root'>
-            <div className="modal-north">
-                <b>Remove song?</b>
-            </div>
-            <div className="modal-center">
-                <div className="modal-center-content">
+                <Grid container spacing={1}>
+                <Grid item xs={12}>
+                <Typography component='h1' variant='h4'>
+                    Remove Song
+                </Typography>
+                </Grid>
+                <Typography component='h1' variant='h6'>
                     Are you sure you wish to permanently remove <b>{songTitle}</b> from the playlist?
-                </div>
-            </div>
-            <div className="modal-south">
-                <input type="button" 
-                    id="remove-song-confirm-button" 
-                    className="modal-button" 
-                    onClick={handleConfirmRemoveSong} 
-                    value='Confirm' />
-                <input 
-                    type="button" 
-                    id="remove-song-cancel-button" 
-                    className="modal-button" 
-                    onClick={handleCancelRemoveSong} 
-                    value='Cancel' />
-            </div>
-        </div>
-    </div>
+                </Typography>
+                <Grid item xs={12}>
+                    <Box
+                        component='span'
+                        m={1}
+                        display='flex'
+                        justifyContent='space-between'
+                        alignItems='center'
+                    >
+                    <Button variant='contained' onClick={handleConfirmRemoveSong}>
+                        Confirm
+                    </Button>{' '}
+                    <Button variant='contained' onClick={handleCancelRemoveSong}>
+                        Cancel
+                    </Button>
+                    </Box>
+                </Grid>
+                </Grid>
             </Box>
         </Modal>
     );
